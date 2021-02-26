@@ -1,0 +1,28 @@
+[alias]
+
+	# Amend the currently staged files to the latest commit.
+	amend = commit --amend --reuse-message=HEAD
+
+	# View abbreviated SHA, description, and history graph of the latest 20 commits.
+	l = log --pretty=oneline --abbrev-commit --graph -n 20
+
+	# Log with one line per item.
+	lo = "log --oneline"
+
+	# View the current working tree status using the short format.
+	s = status -s
+
+	# Show the user email for the current repository.
+	whoami = config user.email
+
+[diff]
+
+	tool = vscode
+
+[difftool]
+
+	prompt = false
+
+[difftool "vscode"]
+
+	cmd = code --diff --new-window --wait $LOCAL $REMOTE
