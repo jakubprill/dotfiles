@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Create a new directory and enter it
+function mkd() {
+	mkdir -p "$@" && cd "$_";
+}
+
+# Dive
+dive() {
+  docker run --rm -it \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    wagoodman/dive:latest "$@"
+}
+
+# Nearley
+nearleyc() {
+  docker run --rm -it \
+    -v $PWD:/cwd -w /cwd \
+    nearley nearleyc "$@"
+}
+
+nearley-test() {
+  docker run --rm -it \
+    -v $PWD:/cwd -w /cwd \
+    nearley nearley-test "$@"
+}
+
+nearley-unparse() {
+  docker run --rm -it \
+    -v $PWD:/cwd -w /cwd \
+    nearley nearley-unparse "$@" && echo ""
+}
+
+nearleyc-output-grammar() {
+  nearleyc "$1".ne -o "$1".js
+}

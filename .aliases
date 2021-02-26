@@ -1,0 +1,42 @@
+ #!/usr/bin/env bash
+
+# Easier navigation: .., ..., ...., ....., ~ and -
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~" # `cd` is probably faster to type though
+alias -- -="cd -"
+
+alias cl="clear"
+alias rs="reset"
+
+# Shortcuts
+alias g="git"
+alias p="cd ~/Projects"
+
+# Docker
+alias dk='docker'
+alias dki='docker images'  # List Docker images
+
+# docker exec
+alias dkex='docker exec -it ' # Useful to run any commands into container without leaving host
+
+# docker ps
+alias dkp='docker ps'
+alias dkpa='docker ps -a'
+
+# docker run
+alias dkri='docker run --rm -i '
+alias dkrit='docker run --rm -it '
+alias dkritc='docker run --rm -it -v $PWD:/cwd -w /cwd '
+
+# Nearley
+alias nnc='nearleyc '
+alias nnt='nearley-test '
+alias nnu='nearley-unparse '
+
+alias nncg='nearleyc-output-grammar '
+
+# Stopwatch
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'

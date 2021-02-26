@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Load the shell dotfiles.
+for file in ~/.{aliases,functions,extra}; do
+  [ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
+
+# https://hub.docker.com/r/danlynn/bat/
+function bat {
+  if [[ $# -eq 1 && $1 =~ ^\.\. ]]; then
+    # handle ../../path when single arg
+    docker run -it --rm -e BAT_THEME -e BAT_STYLE -e BAT_TABS -e PAGER -v "$HOME/.config/bat/config:/root/.config/bat/config" -v "$(cd "$(dirname "$1")"; pwd):/myapp" danlynn/bat $(basename "$1")
+  elif [[ $# -eq 1 && $1 =~ ^\/ ]]; then
+    # handle ~/path -or- actual absolute paths when single arg
+    docker run -it --rm -e BAT_THEME -e BAT_STYLE -e BAT_TABS -e PAGER -v "$HOME/.config/bat/config:/root/.config/bat/config" -v "$(dirname "$1"):/myapp" danlynn/bat $(basename "$1")
+  else
+    # handle most everything else
+    docker run -it --rm -e BAT_THEME -e BAT_STYLE -e BAT_TABS -e PAGER -v "$HOME/.config/bat/config:/root/.config/bat/config" -v "$(pwd):/myapp" danlynn/bat $@
+  fi
+}
